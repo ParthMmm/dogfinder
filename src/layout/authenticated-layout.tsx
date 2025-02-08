@@ -26,9 +26,7 @@ export function AuthenticatedLayout({
   return (
     <>
       <Nav />
-      <main className="flex min-h-screen ">
-        {children}
-      </main>
+      <main className="flex min-h-screen">{children}</main>
     </>
   );
 }
