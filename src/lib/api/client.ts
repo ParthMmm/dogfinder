@@ -60,3 +60,10 @@ export async function getDogSearch(data: z.infer<typeof dogSearchSchema>) {
     query: data,
   });
 }
+
+export async function getDogsById({ dogIds }: { dogIds: string[] }) {
+  return api<Dog[]>("/dogs", {
+    method: "POST",
+    body: JSON.stringify(dogIds),
+  });
+}

@@ -18,6 +18,14 @@ const config = {
     defaultLocale: "en",
   },
   transpilePackages: ["geist"],
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "frontend-take-home.fetch.com",
+      },
+    ],
+  },
 };
 
 export default config;

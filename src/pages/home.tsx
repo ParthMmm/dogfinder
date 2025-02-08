@@ -3,16 +3,11 @@ import { AuthenticatedLayout } from "~/layout/authenticated-layout";
 import Head from "next/head";
 import { useGetDogsSearch } from "~/hooks/queries/use-get-dogs-search";
 import { Input } from "~/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "~/components/ui/select";
+
 import { Card, CardContent } from "~/components/ui/card";
-import { useGetDogBreeds } from "~/hooks/queries/use-get-dog-breeds";
 import { BreedPicker } from "~/components/breed-picker";
+
+import Image from "next/image";
 
 export default function Page() {
   return (
@@ -22,11 +17,13 @@ export default function Page() {
         <meta name="description" content="DogFinder" />
       </Head>
 
-      <div className="max-w-7xl h-full mx-auto">
+      <div className="mx-auto h-full max-w-7xl">
         <div className="mx-auto space-y-6 py-4 md:space-y-12 md:py-10">
           <div className="flex flex-row items-center justify-between align-middle">
             <div className="text-left">
-              <div className="text-3xl font-bold tracking-tight">{"find a dog"}</div>
+              <div className="text-3xl font-bold tracking-tight">
+                {"find a dog"}
+              </div>
             </div>
           </div>
           <DogTable />
@@ -41,8 +38,19 @@ Page.getLayout = function getLayout(dashboardPage: ReactElement) {
 };
 
 function DogTable() {
-  const { data } = useGetDogsSearch();
-  const { data: breeds } = useGetDogBreeds();
+  const { data, isPending, isError } = useGetDogsSearch();
+
+  if (!data) {
+    return null;
+  }
+
+  if (isPending) {
+    return <div>loading...</div>;
+  }
+
+  if (isError) {
+    return <div>error</div>;
+  }
 
   return (
     <div>
@@ -52,10 +60,19 @@ function DogTable() {
       </div>
 
       <div className="grid grid-cols-4">
-        {data?.resultIds?.map((id) => {
+        {data.map((dog) => {
           return (
-            <Card key={id}>
-              <CardContent>{id}</CardContent>
+            <Card key={dog.id}>
+              <CardContent>
+                <Image
+                  src={dog.img}
+                  width={500}
+                  height={500}
+                  alt="Picture of the author"
+                />
+
+                {dog.name}
+              </CardContent>
             </Card>
           );
         })}
