@@ -9,6 +9,7 @@ import { BreedPicker } from "~/components/breed-picker";
 import Image from "next/image";
 import { Button } from "~/components/ui/button";
 import { HeartIcon } from "lucide-react";
+import { AgeSlider } from "~/components/age-select";
 
 export default function Page() {
   return (
@@ -43,6 +44,7 @@ function DogSearch() {
     <div>
       <div className="flex flex-row items-center gap-2 pb-2">
         <BreedPicker />
+        <AgeSlider />
       </div>
       <DogTable />
     </div>
