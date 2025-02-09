@@ -17,6 +17,7 @@ import {
 import { useGetDogBreeds } from "~/hooks/queries/use-get-dog-breeds";
 import { cn } from "~/lib/utils";
 import { useQueryState, parseAsArrayOf, parseAsString } from "nuqs";
+import { Button } from "~/components/ui/button";
 
 export function BreedPicker() {
   const [selectedBreeds, setSelectedBreeds] = useQueryState(
@@ -30,11 +31,11 @@ export function BreedPicker() {
     <>
       <Popover>
         <PopoverTrigger asChild>
-          <button className="inline-flex h-8 items-center overflow-hidden rounded-md border border-neutral-700 bg-neutral-800 text-sm font-medium text-neutral-400 transition-colors hover:text-neutral-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-500 disabled:pointer-events-none disabled:opacity-50">
-            <div className="flex items-center justify-start px-3 align-middle">
+          <Button variant="secondary">
+            <div className="flex items-center justify-start align-middle">
               {"Breed"}
             </div>
-          </button>
+          </Button>
         </PopoverTrigger>
         <PopoverContent className="overflow-hidden p-0" align="start">
           <Command>
