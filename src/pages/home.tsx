@@ -5,10 +5,10 @@ import { useGetDogsSearch } from "~/hooks/queries/use-get-dogs-search";
 
 import { Card, CardContent } from "~/components/ui/card";
 
-import Image from "next/image";
-import { Button } from "~/components/ui/button";
-import { HeartIcon } from "lucide-react";
 import { FilterSidebar } from "~/components/filter-sidebar";
+
+import { DogCard } from "~/components/dog-card";
+import { FavoriteSidebar } from "~/components/favorite-sidebar";
 
 export default function Page() {
   return (
@@ -39,8 +39,9 @@ Page.getLayout = function getLayout(dashboardPage: ReactElement) {
 function DogSearch() {
   return (
     <div className="flex h-full flex-col gap-6 md:flex-row">
-      <div className="w-full md:w-1/4">
+      <div className="w-full md:w-1/4 space-y-4">
         <FilterSidebar />
+        <FavoriteSidebar />
       </div>
       <div className="w-full overflow-y-auto pb-6 md:w-3/4">
         <DogTable />
@@ -77,53 +78,10 @@ function DogTable() {
       </div>
     );
   }
-
   return (
     <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
       {data.map((dog) => {
-        return (
-          <Card key={dog.id} className="w-full md:min-w-[200px]">
-            <CardContent className="p-0">
-              <Image
-                src={dog.img}
-                width={200}
-                height={266}
-                className="aspect-[3/4] w-full rounded-t-md bg-gray-200 object-cover sm:aspect-auto sm:h-72"
-                alt="picture of a dog"
-              />
-
-              <div className="flex flex-row justify-between p-4">
-                <div>
-                  <div className="flex flex-col gap-0.5">
-                    <h3 className="text-xl font-medium leading-4">
-                      {dog.name}
-                    </h3>
-                    <p className="text-lg text-neutral-700 dark:text-neutral-400">
-                      {dog.breed}
-                    </p>
-                  </div>
-                  <div className="flex flex-row items-center gap-2 pt-2">
-                    {dog.age === 0 ? (
-                      <p className="text-sm">Puppy</p>
-                    ) : (
-                      <p className="text-sm">{dog.age} years old</p>
-                    )}
-                  </div>
-                  <p className="text-sm tabular-nums">{dog.zip_code}</p>
-                </div>{" "}
-                <div>
-                  <Button
-                    variant="none"
-                    size="icon"
-                    className="hover:text-red-500"
-                  >
-                    <HeartIcon className="h-4 w-4" />
-                  </Button>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        );
+        return <DogCard dog={dog} key={dog.id} />;
       })}
     </div>
   );

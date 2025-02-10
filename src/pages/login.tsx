@@ -42,7 +42,6 @@ export default function Login() {
   const loginMutation = useMutation({
     mutationFn: login,
     onSuccess: async (_, variables) => {
-      toast.success("Login successful!");
       setAuthenticated(true);
       setUser(variables);
       await router.push("/home");

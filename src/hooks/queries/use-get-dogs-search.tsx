@@ -19,7 +19,7 @@ export function useGetDogsSearch() {
   );
   const [maxAge] = useQueryState(
     "maxAge",
-    parseAsInteger.withDefault(25).withOptions({ clearOnDefault: true }),
+    parseAsInteger.withDefault(20).withOptions({ clearOnDefault: true }),
   );
   const [sort] = useQueryState(
     "sort",

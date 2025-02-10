@@ -25,7 +25,7 @@ export function SortSelect() {
 
   return (
     <Select defaultValue={sort} onValueChange={(val) => setSort(val)}>
-      <SelectTrigger className="w-[180px]">
+      <SelectTrigger className="w-[193px]">
         <SelectValue placeholder="Sort" />
       </SelectTrigger>
       <SelectContent>
