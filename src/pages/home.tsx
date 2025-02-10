@@ -4,22 +4,11 @@ import Head from "next/head";
 import { useGetDogsSearch } from "~/hooks/queries/use-get-dogs-search";
 
 import { Card, CardContent } from "~/components/ui/card";
-import { BreedPicker } from "~/components/breed-picker";
 
 import Image from "next/image";
 import { Button } from "~/components/ui/button";
 import { HeartIcon } from "lucide-react";
-import { AgeSlider } from "~/components/age-slider";
-import {
-  parseAsArrayOf,
-  parseAsInteger,
-  parseAsString,
-  useQueryState,
-} from "nuqs";
-import { useAtom, useSetAtom } from "jotai";
-import { ageSliderValuesAtom, sliderUsedAtom } from "~/store/app";
-import { FilterBadge, FilterBadgeXButton } from "~/components/filter-badge";
-import { SortSelect } from "~/components/sort-select";
+import { FilterSidebar } from "~/components/filter-sidebar";
 
 export default function Page() {
   return (
@@ -29,17 +18,15 @@ export default function Page() {
         <meta name="description" content="DogFinder" />
       </Head>
 
-      <div className="mx-auto h-full container">
-        <div className="mx-auto space-y-6 px-4 py-4 md:space-y-12 md:py-10">
-          <div className="flex flex-row items-center justify-between align-middle">
-            <div className="text-left">
-              <div className="text-3xl font-bold tracking-tight">
-                {"find a dog"}
-              </div>
+      <div className="container mx-auto h-full space-y-6 px-4 py-4 md:space-y-12 md:py-10">
+        <div className="flex flex-row items-center justify-between align-middle">
+          <div className="text-left">
+            <div className="text-3xl font-bold tracking-tight">
+              {"find a dog"}
             </div>
           </div>
-          <DogSearch />
         </div>
+        <DogSearch />
       </div>
     </>
   );
@@ -50,61 +37,12 @@ Page.getLayout = function getLayout(dashboardPage: ReactElement) {
 };
 
 function DogSearch() {
-  const setAgeSliderValues = useSetAtom(ageSliderValuesAtom);
-  const [selectedBreeds, setSelectedBreeds] = useQueryState(
-    "breeds",
-    parseAsArrayOf(parseAsString).withDefault([]),
-  );
-  const [sliderUsed, setSliderUsed] = useAtom(sliderUsedAtom);
-  const [minAge, setMinAge] = useQueryState(
-    "minAge",
-    parseAsInteger.withDefault(0).withOptions({ clearOnDefault: true }),
-  );
-  const [maxAge, setMaxAge] = useQueryState(
-    "maxAge",
-    parseAsInteger.withDefault(20).withOptions({ clearOnDefault: true }),
-  );
-
   return (
-    <div className="flex flex-row items-start gap-4">
-      <div className="w-full flex-1 flex-row space-y-4">
-        <div className="flex flex-row justify-between gap-2">
-          <div className="flex flex-row gap-2">
-            <BreedPicker />
-            <AgeSlider />
-          </div>
-          <div className="flex flex-row gap-2 overflow-x-scroll">
-            {/* if slider was used, show the badge, fixes issue when minAge is 0 which is false but a valid value */}
-            {sliderUsed ? (
-              <FilterBadge>
-                Ages {minAge} - {maxAge}
-                <FilterBadgeXButton
-                  onClick={() => {
-                    void setMinAge(null);
-                    void setMaxAge(null);
-                    setSliderUsed(false);
-                    setAgeSliderValues([0, 20]);
-                  }}
-                />
-              </FilterBadge>
-            ) : null}
-            <div className="flex flex-1 flex-row gap-2 overflow-auto whitespace-nowrap">
-              {selectedBreeds.map((selected) => (
-                <FilterBadge key={selected}>
-                  {selected}
-                  <FilterBadgeXButton
-                    onClick={() => {
-                      void setSelectedBreeds(
-                        selectedBreeds.filter((breed) => breed !== selected),
-                      );
-                    }}
-                  />
-                </FilterBadge>
-              ))}
-            </div>
-          </div>
-          <SortSelect />
-        </div>
+    <div className="flex h-full flex-col gap-6 md:flex-row">
+      <div className="w-full md:w-1/4">
+        <FilterSidebar />
+      </div>
+      <div className="w-full overflow-y-auto pb-6 md:w-3/4">
         <DogTable />
       </div>
     </div>
@@ -125,9 +63,9 @@ function DogTable() {
     return (
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
         {Array.from({ length: 12 }).map((_, index) => (
-          <Card key={index} className="w-full md:min-w-[292px]">
+          <Card key={index} className="w-full md:min-w-[200px]">
             <CardContent className="p-0">
-              <div className="aspect-[3/4] w-full animate-pulse rounded-t-md bg-stone-500 object-cover group-hover:opacity-75 sm:aspect-auto sm:h-96 md:w-[292px]" />
+              <div className="aspect-[3/4] w-full animate-pulse rounded-t-md bg-stone-500 object-cover group-hover:opacity-75 sm:aspect-auto sm:h-96 md:w-[200px]" />
 
               <div className="p-4">
                 <div className="h-6 w-full animate-pulse rounded-md bg-stone-500" />
@@ -144,13 +82,13 @@ function DogTable() {
     <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
       {data.map((dog) => {
         return (
-          <Card key={dog.id} className="w-full md:min-w-[292px]">
+          <Card key={dog.id} className="w-full md:min-w-[200px]">
             <CardContent className="p-0">
               <Image
                 src={dog.img}
-                width={292}
-                height={389}
-                className="aspect-[3/4] w-full rounded-t-md bg-gray-200 object-cover sm:aspect-auto sm:h-96 md:w-[292px]"
+                width={200}
+                height={266}
+                className="aspect-[3/4] w-full rounded-t-md bg-gray-200 object-cover sm:aspect-auto sm:h-72"
                 alt="picture of a dog"
               />
 
