@@ -26,11 +26,14 @@ export function useGetDogsSearch() {
     parseAsStringLiteral(sortLiterals).withDefault("breed:asc"),
   );
 
+  const [pageSize] = useQueryState("pageSize", parseAsString.withDefault("25"));
+
   const searchParams = {
     breeds: selectedBreeds,
     ageMin: minAge,
     ageMax: maxAge,
     sort: sort,
+    size: pageSize,
   };
 
   const { data, isPending, isError } = useQuery({

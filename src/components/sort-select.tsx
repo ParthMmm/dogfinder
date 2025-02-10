@@ -7,6 +7,7 @@ import {
   SelectValue,
 } from "./ui/select";
 import { parseAsString, useQueryState } from "nuqs";
+import { Label } from "~/components/ui/label";
 
 const sortOptions: Record<SortOption, string> = {
   "breed:asc": "Breed: A-Z",
@@ -24,17 +25,20 @@ export function SortSelect() {
   );
 
   return (
-    <Select defaultValue={sort} onValueChange={(val) => setSort(val)}>
-      <SelectTrigger className="w-[193px]">
-        <SelectValue placeholder="Sort" />
-      </SelectTrigger>
-      <SelectContent>
-        {Object.entries(sortOptions).map(([key, value]) => (
-          <SelectItem key={key} value={key}>
-            {value}
-          </SelectItem>
-        ))}
-      </SelectContent>
-    </Select>
+    <div className="flex flex-col gap-2">
+      <Label htmlFor="sort">Sort</Label>
+      <Select value={sort} onValueChange={(val) => setSort(val)}>
+        <SelectTrigger className="w-[193px]" id="sort">
+          <SelectValue placeholder="Sort" />
+        </SelectTrigger>
+        <SelectContent>
+          {Object.entries(sortOptions).map(([key, value]) => (
+            <SelectItem key={key} value={key}>
+              {value}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+    </div>
   );
 }

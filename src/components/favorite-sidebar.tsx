@@ -7,7 +7,7 @@ import { FavoriteDogButton } from "./dog-card";
 export function FavoriteSidebar() {
   const [favoriteDogs, setFavoriteDogs] = useAtom(favoriteDogsAtom);
 
-  if (!favoriteDogs) {
+  if (favoriteDogs.length === 0) {
     return null;
   }
 
@@ -20,7 +20,7 @@ export function FavoriteSidebar() {
         {favoriteDogs.map((dog) => {
           return (
             <div className="flex w-full flex-col gap-1" key={dog.id}>
-              <div className="flex flex-row items-center justify-between gap-0.5 px-4 align-middle">
+              <div className="flex flex-row items-center justify-between gap-0.5 align-middle">
                 <div className="flex flex-shrink-0 flex-row items-center justify-start gap-2 align-middle">
                   <div className="h-[40px] w-[40px] max-w-[40px] flex-shrink-0">
                     <Image

@@ -62,7 +62,7 @@ export const dogSearchSchema = z.object({
   zipCodes: z.array(z.number()).optional(),
   ageMin: z.number().optional(),
   ageMax: z.number().optional(),
-  size: z.number().default(25).optional(),
+  size: z.string().default("25").optional(),
   from: z.number().optional(),
   sort: sortSchema.optional(),
 });

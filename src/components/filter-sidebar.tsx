@@ -13,6 +13,7 @@ import { BreedPicker } from "~/components/breed-picker";
 import { Button } from "~/components/ui/button";
 import { XIcon } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
+import { PageSizeSelect } from "~/components/page-size-select";
 
 export function FilterSidebar() {
   const setAgeSliderValues = useSetAtom(ageSliderValuesAtom);
@@ -44,8 +45,9 @@ export function FilterSidebar() {
         <CardTitle>Filters</CardTitle>
       </CardHeader>
       <CardContent className="">
-        <div className="flex">
+        <div className="flex gap-2">
           <SortSelect />
+          <PageSizeSelect />
         </div>
         <div className="flex flex-row flex-wrap gap-4 pt-4">
           <BreedPicker />
