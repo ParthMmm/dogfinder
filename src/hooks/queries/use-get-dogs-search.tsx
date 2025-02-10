@@ -26,14 +26,20 @@ export function useGetDogsSearch() {
     parseAsStringLiteral(sortLiterals).withDefault("breed:asc"),
   );
 
-  const [pageSize] = useQueryState("pageSize", parseAsString.withDefault("25"));
+  const [pageSize] = useQueryState("pageSize", parseAsInteger.withDefault(25));
+
+  const [page] = useQueryState("page", parseAsInteger.withDefault(1));
+
+  //offset = pageSize * page-1
+  const offset = Number(pageSize) * (page - 1);
 
   const searchParams = {
     breeds: selectedBreeds,
     ageMin: minAge,
     ageMax: maxAge,
     sort: sort,
-    size: pageSize,
+    size: pageSize.toString(),
+    from: offset,
   };
 
   const { data, isPending, isError } = useQuery({
@@ -53,5 +59,5 @@ export function useGetDogsSearch() {
     staleTime: 20 * 1000,
   });
 
-  return dogsQuery;
+  return { dogsQuery, total: data?.total ?? 0 };
 }

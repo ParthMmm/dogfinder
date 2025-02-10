@@ -9,6 +9,15 @@ import { FilterSidebar } from "~/components/filter-sidebar";
 
 import { DogCard } from "~/components/dog-card";
 import { FavoriteSidebar } from "~/components/favorite-sidebar";
+import { Button } from "~/components/ui/button";
+import {
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  ChevronsLeftIcon,
+  ChevronsRightIcon,
+} from "lucide-react";
+import { parseAsInteger, useQueryState } from "nuqs";
+import { parseAsString } from "nuqs";
 
 export default function Page() {
   return (
@@ -51,16 +60,19 @@ function DogSearch() {
 }
 
 function DogTable() {
-  const { data, isPending, isError } = useGetDogsSearch();
-
-  if (!data) {
+  const { dogsQuery, total } = useGetDogsSearch();
+  const [pageSize, setPageSize] = useQueryState(
+    "pageSize",
+    parseAsString.withDefault("25"),
+  );
+  if (!dogsQuery.data) {
     return null;
   }
-  if (isError) {
+  if (dogsQuery.isError) {
     return <div>error</div>;
   }
 
-  if (isPending) {
+  if (dogsQuery.isPending) {
     return (
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
         {Array.from({ length: 12 }).map((_, index) => (
@@ -79,10 +91,75 @@ function DogTable() {
     );
   }
   return (
-    <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
-      {data.map((dog) => {
-        return <DogCard dog={dog} key={dog.id} />;
-      })}
+    <>
+      <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
+        {dogsQuery.data.map((dog) => {
+          return <DogCard dog={dog} key={dog.id} />;
+        })}
+      </div>
+      <Pagination />
+    </>
+  );
+}
+
+function Pagination() {
+  const { total } = useGetDogsSearch();
+  const [pageSize] = useQueryState("pageSize", parseAsInteger.withDefault(25));
+
+  const [page, setPage] = useQueryState("page", parseAsInteger.withDefault(1));
+
+  const totalPages = Math.ceil(total / pageSize);
+
+  return (
+    <div className="flex flex-row items-center justify-end gap-2">
+      <div className="flex flex-row items-center justify-center gap-2">
+        Page {page.toString()} of {totalPages}
+      </div>
+
+      <Button
+        variant="outline"
+        size="icon"
+        onClick={() => setPage(1)}
+        disabled={page === 1}
+      >
+        <ChevronsLeftIcon />
+      </Button>
+      <Button
+        variant="outline"
+        size="icon"
+        onClick={() => {
+          if (page > 1) {
+            void setPage(page - 1);
+          }
+        }}
+        disabled={page === 1}
+      >
+        <ChevronLeftIcon />
+      </Button>
+      <Button
+        variant="outline"
+        size="icon"
+        onClick={() => {
+          if (page < totalPages) {
+            void setPage(page + 1);
+          }
+        }}
+        disabled={page === totalPages}
+      >
+        <ChevronRightIcon />
+      </Button>
+      <Button
+        variant="outline"
+        size="icon"
+        onClick={() => {
+          if (page < totalPages) {
+            void setPage(totalPages);
+          }
+        }}
+        disabled={page === totalPages}
+      >
+        <ChevronsRightIcon />
+      </Button>
     </div>
   );
 }
