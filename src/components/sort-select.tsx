@@ -10,12 +10,12 @@ import { parseAsString, useQueryState } from "nuqs";
 import { Label } from "~/components/ui/label";
 
 const sortOptions: Record<SortOption, string> = {
-  "breed:asc": "Breed: A-Z",
-  "breed:desc": "Breed: Z-A",
-  "name:asc": "Name: A-Z",
-  "name:desc": "Name: Z-A",
-  "age:asc": "Age: Puppy-20",
-  "age:desc": "Age: 20-Puppy",
+  "breed:asc": "Breed: A - Z",
+  "breed:desc": "Breed: Z - A",
+  "name:asc": "Name: A - Z",
+  "name:desc": "Name: Z - A",
+  "age:asc": "Age: Puppy - 20",
+  "age:desc": "Age: 20 - Puppy",
 };
 
 export function SortSelect() {
