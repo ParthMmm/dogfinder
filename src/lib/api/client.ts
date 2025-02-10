@@ -37,14 +37,34 @@ export async function getDogBreeds() {
   });
 }
 
+export const sortSchema = z.enum([
+  "breed:asc",
+  "breed:desc",
+  "name:asc",
+  "name:desc",
+  "age:asc",
+  "age:desc",
+]);
+
+export const sortLiterals = [
+  "breed:asc",
+  "breed:desc",
+  "name:asc",
+  "name:desc",
+  "age:asc",
+  "age:desc",
+] as const;
+
+export type SortOption = z.infer<typeof sortSchema>;
+
 export const dogSearchSchema = z.object({
   breeds: z.array(z.string()).optional(),
   zipCodes: z.array(z.number()).optional(),
-  ageMin: z.number().optional().optional(),
-  ageMax: z.number().optional().optional(),
+  ageMin: z.number().optional(),
+  ageMax: z.number().optional(),
   size: z.number().default(25).optional(),
   from: z.number().optional(),
-  sort: z.string().optional(),
+  sort: sortSchema.optional(),
 });
 
 export type DogSearch = {

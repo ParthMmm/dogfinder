@@ -1,15 +1,36 @@
 import { keepPreviousData, skipToken, useQuery } from "@tanstack/react-query";
-import { getDogsById, getDogSearch } from "~/lib/api/client";
-import { useQueryState, parseAsArrayOf, parseAsString } from "nuqs";
+import { getDogsById, getDogSearch, sortLiterals } from "~/lib/api/client";
+import {
+  useQueryState,
+  parseAsArrayOf,
+  parseAsString,
+  parseAsInteger,
+  parseAsStringLiteral,
+} from "nuqs";
 
 export function useGetDogsSearch() {
-  const [selectedBreeds, setSelectedBreeds] = useQueryState(
+  const [selectedBreeds] = useQueryState(
     "breeds",
     parseAsArrayOf(parseAsString).withDefault([]),
+  );
+  const [minAge] = useQueryState(
+    "minAge",
+    parseAsInteger.withDefault(0).withOptions({ clearOnDefault: false }),
+  );
+  const [maxAge] = useQueryState(
+    "maxAge",
+    parseAsInteger.withDefault(25).withOptions({ clearOnDefault: true }),
+  );
+  const [sort] = useQueryState(
+    "sort",
+    parseAsStringLiteral(sortLiterals).withDefault("breed:asc"),
   );
 
   const searchParams = {
     breeds: selectedBreeds,
+    ageMin: minAge,
+    ageMax: maxAge,
+    sort: sort,
   };
 
   const { data, isPending, isError } = useQuery({

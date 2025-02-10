@@ -9,7 +9,17 @@ import { BreedPicker } from "~/components/breed-picker";
 import Image from "next/image";
 import { Button } from "~/components/ui/button";
 import { HeartIcon } from "lucide-react";
-import { AgeSlider } from "~/components/age-select";
+import { AgeSlider } from "~/components/age-slider";
+import {
+  parseAsArrayOf,
+  parseAsInteger,
+  parseAsString,
+  useQueryState,
+} from "nuqs";
+import { useAtom, useSetAtom } from "jotai";
+import { ageSliderValuesAtom, sliderUsedAtom } from "~/store/app";
+import { FilterBadge, FilterBadgeXButton } from "~/components/filter-badge";
+import { SortSelect } from "~/components/sort-select";
 
 export default function Page() {
   return (
@@ -19,7 +29,7 @@ export default function Page() {
         <meta name="description" content="DogFinder" />
       </Head>
 
-      <div className="mx-auto h-full max-w-7xl">
+      <div className="mx-auto h-full container">
         <div className="mx-auto space-y-6 px-4 py-4 md:space-y-12 md:py-10">
           <div className="flex flex-row items-center justify-between align-middle">
             <div className="text-left">
@@ -40,13 +50,63 @@ Page.getLayout = function getLayout(dashboardPage: ReactElement) {
 };
 
 function DogSearch() {
+  const setAgeSliderValues = useSetAtom(ageSliderValuesAtom);
+  const [selectedBreeds, setSelectedBreeds] = useQueryState(
+    "breeds",
+    parseAsArrayOf(parseAsString).withDefault([]),
+  );
+  const [sliderUsed, setSliderUsed] = useAtom(sliderUsedAtom);
+  const [minAge, setMinAge] = useQueryState(
+    "minAge",
+    parseAsInteger.withDefault(0).withOptions({ clearOnDefault: true }),
+  );
+  const [maxAge, setMaxAge] = useQueryState(
+    "maxAge",
+    parseAsInteger.withDefault(20).withOptions({ clearOnDefault: true }),
+  );
+
   return (
-    <div>
-      <div className="flex flex-row items-center gap-2 pb-2">
-        <BreedPicker />
-        <AgeSlider />
+    <div className="flex flex-row items-start gap-4">
+      <div className="w-full flex-1 flex-row space-y-4">
+        <div className="flex flex-row justify-between gap-2">
+          <div className="flex flex-row gap-2">
+            <BreedPicker />
+            <AgeSlider />
+          </div>
+          <div className="flex flex-row gap-2 overflow-x-scroll">
+            {/* if slider was used, show the badge, fixes issue when minAge is 0 which is false but a valid value */}
+            {sliderUsed ? (
+              <FilterBadge>
+                Ages {minAge} - {maxAge}
+                <FilterBadgeXButton
+                  onClick={() => {
+                    void setMinAge(null);
+                    void setMaxAge(null);
+                    setSliderUsed(false);
+                    setAgeSliderValues([0, 20]);
+                  }}
+                />
+              </FilterBadge>
+            ) : null}
+            <div className="flex flex-1 flex-row gap-2 overflow-auto whitespace-nowrap">
+              {selectedBreeds.map((selected) => (
+                <FilterBadge key={selected}>
+                  {selected}
+                  <FilterBadgeXButton
+                    onClick={() => {
+                      void setSelectedBreeds(
+                        selectedBreeds.filter((breed) => breed !== selected),
+                      );
+                    }}
+                  />
+                </FilterBadge>
+              ))}
+            </div>
+          </div>
+          <SortSelect />
+        </div>
+        <DogTable />
       </div>
-      <DogTable />
     </div>
   );
 }
@@ -63,7 +123,7 @@ function DogTable() {
 
   if (isPending) {
     return (
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
         {Array.from({ length: 12 }).map((_, index) => (
           <Card key={index} className="w-full md:min-w-[292px]">
             <CardContent className="p-0">
@@ -81,7 +141,7 @@ function DogTable() {
   }
 
   return (
-    <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+    <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
       {data.map((dog) => {
         return (
           <Card key={dog.id} className="w-full md:min-w-[292px]">
