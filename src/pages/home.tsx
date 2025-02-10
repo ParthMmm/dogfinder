@@ -39,7 +39,7 @@ Page.getLayout = function getLayout(dashboardPage: ReactElement) {
 function DogSearch() {
   return (
     <div className="flex h-full flex-col gap-6 md:flex-row">
-      <div className="w-full md:w-1/4 space-y-4">
+      <div className="w-full space-y-4 md:w-1/4">
         <FilterSidebar />
         <FavoriteSidebar />
       </div>

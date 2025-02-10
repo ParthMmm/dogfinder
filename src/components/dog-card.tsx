@@ -1,5 +1,5 @@
 import { HeartIcon } from "lucide-react";
-import { Dog } from "~/lib/api/types";
+import { type Dog } from "~/lib/api/types";
 import { cn } from "~/lib/utils";
 import { Button } from "./ui/button";
 import { Card, CardContent } from "./ui/card";
@@ -8,18 +8,6 @@ import { useAtom } from "jotai";
 import { favoriteDogsAtom } from "~/store/app";
 
 export function DogCard({ dog }: { dog: Dog }) {
-  const [favoriteDogs, setFavoriteDogs] = useAtom(favoriteDogsAtom);
-
-  const isFavorited = favoriteDogs.some((favDog) => favDog.id === dog.id);
-
-  const handleFavorite = () => {
-    if (isFavorited) {
-      setFavoriteDogs(favoriteDogs.filter((x) => x.id !== dog.id));
-    } else {
-      setFavoriteDogs([...favoriteDogs, dog]);
-    }
-  };
-
   return (
     <Card key={dog.id} className="w-full md:min-w-[200px]">
       <CardContent className="p-0">
