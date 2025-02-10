@@ -32,9 +32,9 @@ export function BreedPicker() {
       <Popover>
         <PopoverTrigger asChild>
           <Button variant="secondary">
-            <div className="flex items-center justify-start align-middle">
+            <span className="flex items-center justify-start align-middle">
               {"Breed"}
-            </div>
+            </span>
           </Button>
         </PopoverTrigger>
         <PopoverContent className="overflow-hidden p-0" align="start">
@@ -89,29 +89,6 @@ export function BreedPicker() {
           </Command>
         </PopoverContent>
       </Popover>
-      <div className="flex flex-row gap-2">
-        {selectedBreeds.map((selected) => (
-          <Badge
-            key={selected}
-            className="gap-1 border-orange-600/20 bg-orange-50 dark:border-orange-400/20 dark:bg-orange-400/10"
-            variant={"none"}
-          >
-            <span className="text-orange-800 dark:text-orange-500">
-              {selected}
-            </span>
-            <button
-              onClick={() => {
-                void setSelectedBreeds(
-                  selectedBreeds.filter((breed) => breed !== selected),
-                );
-              }}
-              className="rounded-sm text-stone-400 transition-colors hover:text-stone-500 focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-orange-500 focus-visible:ring-0 dark:text-stone-700"
-            >
-              <X className="h-3 w-3" />
-            </button>
-          </Badge>
-        ))}
-      </div>
     </>
   );
 }
