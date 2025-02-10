@@ -14,6 +14,7 @@ import { useAtom } from "jotai";
 import { ageSliderValuesAtom, sliderUsedAtom } from "~/store/app";
 import { useState, useEffect } from "react";
 import { useDebounce } from "~/hooks/use-debounce";
+import { FilterIcon } from "lucide-react";
 
 export function AgeSlider() {
   const [_, setSliderUsed] = useAtom(sliderUsedAtom);
@@ -39,9 +40,10 @@ export function AgeSlider() {
       <Popover>
         <PopoverTrigger asChild>
           <Button variant="secondary">
-            <div className="flex items-center justify-start align-middle">
+            <span className="flex items-center justify-start align-middle">
+              <FilterIcon className="mr-2 h-4 w-4" />
               {"Age"}
-            </div>
+            </span>
           </Button>
         </PopoverTrigger>
         <PopoverContent className="overflow-hidden p-6" align="start">

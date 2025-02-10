@@ -1,4 +1,4 @@
-import { Check, X } from "lucide-react";
+import { Check, FilterIcon, X } from "lucide-react";
 import { Badge } from "~/components/ui/badge";
 import {
   Command,
@@ -33,6 +33,7 @@ export function BreedPicker() {
         <PopoverTrigger asChild>
           <Button variant="secondary">
             <span className="flex items-center justify-start align-middle">
+              <FilterIcon className="mr-2 h-4 w-4" />
               {"Breed"}
             </span>
           </Button>
