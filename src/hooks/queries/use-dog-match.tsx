@@ -1,13 +1,13 @@
 import { skipToken, useQuery } from "@tanstack/react-query";
 import { useMutation } from "@tanstack/react-query";
-import { useAtom, useSetAtom } from "jotai";
+import { useAtomValue, useSetAtom } from "jotai";
 import { getDogsById, getMatch } from "~/lib/api/client";
 import { favoriteDogsAtom, matchModalOpenAtom } from "~/store/app";
 import { toast } from "sonner";
 import { parseAsString, useQueryState } from "nuqs";
 
 export function useDogMatch() {
-  const [favoriteDogs, _] = useAtom(favoriteDogsAtom);
+  const favoriteDogs = useAtomValue(favoriteDogsAtom);
   const [matchResult, setMatchResult] = useQueryState(
     "matchResult",
     parseAsString.withDefault(""),

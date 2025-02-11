@@ -17,7 +17,6 @@ import {
   ChevronsRightIcon,
 } from "lucide-react";
 import { parseAsInteger, useQueryState } from "nuqs";
-import { parseAsString } from "nuqs";
 import { MatchSidebar } from "~/components/sidebar/match-sidebar";
 
 export default function Page() {
@@ -62,7 +61,7 @@ function DogSearch() {
 }
 
 function DogTable() {
-  const { dogsQuery, total } = useGetDogsSearch();
+  const { dogsQuery } = useGetDogsSearch();
 
   if (
     (!dogsQuery.data || dogsQuery.data.length === 0) &&
@@ -75,7 +74,11 @@ function DogTable() {
     );
   }
   if (dogsQuery.isError) {
-    return <div>error</div>;
+    return (
+      <div className="flex h-full items-center justify-center">
+        <div className="text-2xl font-bold">Error fetching dogs</div>
+      </div>
+    );
   }
 
   if (dogsQuery.isPending) {

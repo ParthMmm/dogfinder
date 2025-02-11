@@ -1,5 +1,4 @@
-import { Check, FilterIcon, X } from "lucide-react";
-import { Badge } from "~/components/ui/badge";
+import { Check, FilterIcon } from "lucide-react";
 import {
   Command,
   CommandEmpty,

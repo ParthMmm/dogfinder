@@ -15,7 +15,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import { PageSizeSelect } from "~/components/filtering/page-size-select";
 import { LocationPicker } from "~/components/filtering/location-picker";
 import { locationSet } from "~/hooks/queries/use-get-dogs-search";
-import { Location } from "~/lib/api/types";
 import { SortSelect } from "~/components/filtering/sort-select";
 
 export function FilterSidebar() {

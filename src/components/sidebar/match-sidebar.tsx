@@ -1,6 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import Image from "next/image";
-import { FavoriteDogButton } from "../dog-card";
 import { useDogMatch } from "~/hooks/queries/use-dog-match";
 import { parseAsString } from "nuqs";
 import { useQueryState } from "nuqs";
@@ -10,7 +9,7 @@ export function MatchSidebar() {
   const { matchQuery } = useDogMatch();
   const dog = matchQuery.data?.[0];
   const setModalOpen = useSetAtom(matchModalOpenAtom);
-  const [matchResult, setMatchResult] = useQueryState(
+  const [matchResult] = useQueryState(
     "matchResult",
     parseAsString.withDefault(""),
   );

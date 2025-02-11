@@ -1,29 +1,16 @@
-import { useState } from "react";
-import { Button } from "~/components/ui/button";
-import {
-  Dialog,
-  DialogDescription,
-  DialogTrigger,
-} from "~/components/ui/dialog";
+import { Dialog, DialogDescription } from "~/components/ui/dialog";
 import {
   DialogContent,
   DialogHeader,
   DialogTitle,
 } from "~/components/ui/dialog";
 import { useDogMatch } from "~/hooks/queries/use-dog-match";
-import { useEffect } from "react";
-import { parseAsString } from "nuqs";
-import { useQueryState } from "nuqs";
 import Image from "next/image";
 import { useGetDogsSearch } from "~/hooks/queries/use-get-dogs-search";
 import { useAtom } from "jotai";
 import { matchModalOpenAtom } from "~/store/app";
 
 export function MatchModal() {
-  const [matchResult, setMatchResult] = useQueryState(
-    "matchResult",
-    parseAsString.withDefault(""),
-  );
   const [isOpen, setIsOpen] = useAtom(matchModalOpenAtom);
 
   const { matchQuery } = useDogMatch();

@@ -12,7 +12,7 @@ import { Slider } from "~/components/ui/slider";
 
 import { useAtom } from "jotai";
 import { ageSliderValuesAtom, sliderUsedAtom } from "~/store/app";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useDebounce } from "~/hooks/use-debounce";
 import { FilterIcon } from "lucide-react";
 
