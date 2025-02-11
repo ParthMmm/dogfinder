@@ -4,7 +4,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "./ui/select";
+} from "../ui/select";
 import { parseAsInteger, useQueryState } from "nuqs";
 import { Label } from "~/components/ui/label";
 

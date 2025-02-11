@@ -3,7 +3,7 @@ import { useAtomValue } from "jotai";
 import { useRouter } from "next/router";
 import { currentUserAtom, isAuthenticatedAtom } from "~/store/app";
 import { Nav } from "~/layout/nav";
-
+import { MatchModal } from "~/components/match-modal";
 export function AuthenticatedLayout({
   children,
 }: {
@@ -26,7 +26,10 @@ export function AuthenticatedLayout({
   return (
     <div className="flex min-h-screen flex-col">
       <Nav />
-      <main className="flex-1 overflow-hidden py-4">{children}</main>
+      <MatchModal />
+      <main className="flex h-[calc(100vh-64px)] overflow-hidden py-4 pb-12">
+        {children}
+      </main>
     </div>
   );
 }

@@ -75,3 +75,10 @@ export async function getLocationByZipCode(
     body: data,
   });
 }
+
+export async function getMatch({ dogIds }: { dogIds: string[] }) {
+  return api<{ match: string }>("/dogs/match", {
+    method: "POST",
+    body: JSON.stringify(dogIds),
+  });
+}

@@ -2,10 +2,13 @@ import { useAtom } from "jotai";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import { favoriteDogsAtom } from "~/store/app";
 import Image from "next/image";
-import { FavoriteDogButton } from "./dog-card";
-
+import { FavoriteDogButton } from "../dog-card";
+import { Button } from "~/components/ui/button";
+import { useDogMatch } from "~/hooks/queries/use-dog-match";
 export function FavoriteSidebar() {
   const [favoriteDogs, setFavoriteDogs] = useAtom(favoriteDogsAtom);
+
+  const { findMatch, matchQuery, matchMutation } = useDogMatch();
 
   if (favoriteDogs.length === 0) {
     return null;
@@ -50,6 +53,15 @@ export function FavoriteSidebar() {
             </div>
           );
         })}
+        <div className="flex pt-2">
+          <Button
+            className="w-full"
+            onClick={() => findMatch()}
+            disabled={matchMutation.isPending || matchQuery.isFetching}
+          >
+            Find your match
+          </Button>
+        </div>
       </CardContent>
     </Card>
   );

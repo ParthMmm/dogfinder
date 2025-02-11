@@ -5,10 +5,10 @@ import { useGetDogsSearch } from "~/hooks/queries/use-get-dogs-search";
 
 import { Card, CardContent } from "~/components/ui/card";
 
-import { FilterSidebar } from "~/components/filter-sidebar";
+import { FilterSidebar } from "~/components/sidebar/filter-sidebar";
 
 import { DogCard } from "~/components/dog-card";
-import { FavoriteSidebar } from "~/components/favorite-sidebar";
+import { FavoriteSidebar } from "~/components/sidebar/favorite-sidebar";
 import { Button } from "~/components/ui/button";
 import {
   ChevronLeftIcon,
@@ -65,7 +65,10 @@ function DogTable() {
     "pageSize",
     parseAsString.withDefault("25"),
   );
-  if (!dogsQuery.data || dogsQuery.data.length === 0) {
+  if (
+    (!dogsQuery.data || dogsQuery.data.length === 0) &&
+    !dogsQuery.isPending
+  ) {
     return (
       <div className="flex h-full items-center justify-center">
         <div className="text-2xl font-bold">No dogs found</div>

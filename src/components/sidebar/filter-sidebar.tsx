@@ -1,4 +1,4 @@
-import { AgeSlider } from "~/components/age-slider";
+import { AgeSlider } from "~/components/filtering/age-slider";
 import {
   parseAsArrayOf,
   parseAsInteger,
@@ -8,15 +8,15 @@ import {
 import { useAtom, useSetAtom } from "jotai";
 import { ageSliderValuesAtom, sliderUsedAtom } from "~/store/app";
 import { FilterBadge, FilterBadgeXButton } from "~/components/filter-badge";
-import { SortSelect } from "~/components/sort-select";
-import { BreedPicker } from "~/components/breed-picker";
+import { BreedPicker } from "~/components/filtering/breed-picker";
 import { Button } from "~/components/ui/button";
 import { XIcon } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
-import { PageSizeSelect } from "~/components/page-size-select";
-import { LocationPicker } from "~/components/location-picker";
+import { PageSizeSelect } from "~/components/filtering/page-size-select";
+import { LocationPicker } from "~/components/filtering/location-picker";
 import { locationSet } from "~/hooks/queries/use-get-dogs-search";
 import { Location } from "~/lib/api/types";
+import { SortSelect } from "~/components/filtering/sort-select";
 
 export function FilterSidebar() {
   const setAgeSliderValues = useSetAtom(ageSliderValuesAtom);
