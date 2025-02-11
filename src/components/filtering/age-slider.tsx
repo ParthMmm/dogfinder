@@ -66,7 +66,6 @@ export function AgeSlider() {
           </div>
         </PopoverContent>
       </Popover>
-      <div className="flex flex-row justify-between"></div>
     </>
   );
 }
