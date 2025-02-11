@@ -25,13 +25,23 @@ const DrawerClose = DrawerPrimitive.Close;
 const DrawerOverlay = React.forwardRef<
   React.ElementRef<typeof DrawerPrimitive.Overlay>,
   React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Overlay>
->(({ className, ...props }, ref) => (
-  <DrawerPrimitive.Overlay
-    ref={ref}
-    className={cn("fixed inset-0 z-50 bg-black/70", className)}
-    {...props}
-  />
-));
+>(({ className, ...props }, ref) => {
+  const closeModals = useSetAtom(closeModalsAtom);
+  {
+    /* replace drawer overlay, because when modal={false} DrawerOverlay returns null, */
+  }
+  return (
+    <div
+      className="fixed inset-0 z-50 bg-black/70 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0"
+      onClick={() => closeModals()}
+      data-vaul-animate={true}
+      data-vaul-overlay=""
+      data-state="open" //fix for animation
+      {...props}
+      ref={ref}
+    />
+  );
+});
 DrawerOverlay.displayName = DrawerPrimitive.Overlay.displayName;
 
 const DrawerContent = React.forwardRef<
@@ -43,6 +53,7 @@ const DrawerContent = React.forwardRef<
   return (
     <DrawerPortal>
       <DrawerOverlay />
+
       <DrawerPrimitive.Content
         ref={ref}
         className={cn(
