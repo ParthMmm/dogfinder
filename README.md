@@ -66,9 +66,12 @@ bun start
 
 - Page refresh will clear cookies due to Chrome's third-party cookie restrictions
   - AWSALB cookie lacks SameSite attribute
-  ```text
-  This Set-Cookie header didn't specify a "SameSite" attribute and was defaulted to
-  "SameSite=Lax," and was blocked because it came from a cross-site response which
-  was not the response to a top-level navigation. The Set-Cookie had to have been
-  set with "SameSite=None" to enable cross-site usage.
-  ```
+    ```
+    This Set-Cookie header didn't specify a "SameSite" attribute and was defaulted to
+    "SameSite=Lax," and was blocked because it came from a cross-site response which
+    was not the response to a top-level navigation. The Set-Cookie had to have been
+    set with "SameSite=None" to enable cross-site usage.
+    ```
+  - Browser Compatibility Issues:
+    - Does not work on iOS mobile browsers
+    - Does not work on Safari
