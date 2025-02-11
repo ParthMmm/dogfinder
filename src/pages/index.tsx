@@ -5,8 +5,8 @@ export default function Page() {
   return (
     <>
       <Head>
-        <title>Fetch</title>
-        <meta name="description" content="Fetch" />
+        <title>DogFinder</title>
+        <meta name="description" content="Find your new furry friend today" />
       </Head>
 
       <main className="flex min-h-screen flex-col items-center justify-center">

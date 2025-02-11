@@ -1,29 +1,58 @@
-# Create T3 App
+# DogFinder
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+A web app to find your new furry friend.
 
-## What's next? How do I make an app with this?
+## Features
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+- Search functionality for finding dogs
+- Filter options for breed, age, location
+- Find a perfect dog match
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+### Core Technologies
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Drizzle](https://orm.drizzle.team)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+- React
+- Next.js
+- TailwindCSS
+- shadcn-ui
+- Nuqs
+- React Query
+- Jotai
 
-## Learn More
+## Getting Started
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+### Installation
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+1. Clone the repository:
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+```bash
+git clone https://github.com/ParthMmm/dogfinder
+cd dogfinder
+```
 
-## How do I deploy this?
+2. Install dependencies:
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+```bash
+npm install
+# or
+bun install
+```
+
+3. Start the development server:
+
+```bash
+npm run dev
+# or
+bun run dev
+```
+
+4. Open [http://localhost:3000](http://localhost:3000) in your browser
+
+For production build:
+
+```bash
+npm run build
+npm start
+# or
+bun run build
+bun start
+```
