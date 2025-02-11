@@ -9,7 +9,10 @@ import {
 } from "nuqs";
 import { sortLiterals } from "~/lib/api/types";
 import type { Location } from "~/lib/api/types";
+import { useEffect } from "react";
 
+//store locations in a map to remove duplicates, unique key is zip_code
+//allows user to filter by saved locations and not just from locations query
 export const locationSet = new Map<string, Location>();
 
 export function useGetDogsSearch() {
@@ -51,6 +54,7 @@ export function useGetDogsSearch() {
     zipCodes: locationZipCodes,
   };
 
+  //get dog ids and total count
   const { data, isPending, isError } = useQuery({
     queryKey: ["dogs-search", searchParams],
     queryFn: () => getDogSearch(searchParams),
@@ -58,6 +62,7 @@ export function useGetDogsSearch() {
     placeholderData: keepPreviousData,
   });
 
+  //get dogs with data by ids
   const dogsQuery = useQuery({
     queryKey: ["dogs", data?.resultIds],
     queryFn: data?.resultIds
@@ -68,6 +73,7 @@ export function useGetDogsSearch() {
     staleTime: 20 * 1000,
   });
 
+  //get locations by zip codes
   const zipCodes = dogsQuery.data?.map((dog) => dog.zip_code);
 
   const { data: locations } = useQuery({
@@ -78,8 +84,6 @@ export function useGetDogsSearch() {
     staleTime: 20 * 1000,
   });
 
-  //store locations in a map to remove duplicates
-  //allows user to filter by saved locations and not just from locations query
   locations?.forEach((location) => {
     if (location?.zip_code) {
       locationSet.set(location.zip_code, location);
@@ -87,6 +91,7 @@ export function useGetDogsSearch() {
   });
 
   return {
+    dogSearchData: data,
     dogsQuery,
     locations: Array.from(locationSet.values()),
     total: data?.total ?? 0,

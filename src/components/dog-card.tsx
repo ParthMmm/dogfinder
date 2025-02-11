@@ -16,7 +16,7 @@ export function DogCard({ dog }: { dog: Dog }) {
   );
 
   return (
-    <Card key={dog.id} className="w-full md:min-w-[200px]">
+    <Card key={dog.id} className="w-full lg:min-w-[200px]">
       <CardContent className="p-0">
         <Image
           src={dog.img}
@@ -25,7 +25,6 @@ export function DogCard({ dog }: { dog: Dog }) {
           className="aspect-[3/4] h-48 w-full rounded-t-md bg-gray-200 object-cover sm:aspect-auto sm:h-72"
           alt={`Photo of ${dog.name}, a ${dog.breed}`}
         />
-
         <div className="flex flex-row justify-between p-4">
           <div>
             <div className="flex flex-col gap-0.5">

@@ -21,7 +21,7 @@ import { type Dog, type Location } from "~/lib/api/types";
 
 export function MatchModal() {
   const [isOpen, setIsOpen] = useAtom(matchModalOpenAtom);
-  const isDesktop = useMediaQuery("(min-width: 768px)");
+  const isDesktop = useMediaQuery("(min-width: 1024px)");
 
   const { matchQuery } = useDogMatch();
   const dog = matchQuery.data?.[0];

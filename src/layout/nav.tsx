@@ -7,7 +7,7 @@ export function Nav() {
     <div className="mx-auto h-16 w-full items-center gap-4 px-4 py-2 md:w-3/4">
       <nav className="flex w-full flex-row justify-between">
         <div className="flex items-center gap-4">
-          <Link href="/">
+          <Link href="/home">
             <span className="text-xl font-black leading-6 tracking-tighter">
               DogFinder
             </span>

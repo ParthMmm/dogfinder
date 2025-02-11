@@ -28,7 +28,7 @@ export function SortSelect() {
     <div className="flex flex-col gap-2">
       <Label htmlFor="sort">Sort</Label>
       <Select value={sort} onValueChange={(val) => setSort(val)}>
-        <SelectTrigger className="w-[193px]" id="sort">
+        <SelectTrigger className="w-[180px]" id="sort">
           <SelectValue placeholder="Sort" />
         </SelectTrigger>
         <SelectContent>

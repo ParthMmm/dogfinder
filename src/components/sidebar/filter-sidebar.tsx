@@ -6,12 +6,7 @@ import {
   useQueryState,
 } from "nuqs";
 import { useAtom, useSetAtom } from "jotai";
-import {
-  ageSliderValuesAtom,
-  filterDrawerOpenAtom,
-  favoriteDrawerOpenAtom,
-  sliderUsedAtom,
-} from "~/store/app";
+import { ageSliderValuesAtom, sliderUsedAtom } from "~/store/app";
 import { FilterBadge, FilterBadgeXButton } from "~/components/filter-badge";
 import { BreedPicker } from "~/components/filtering/breed-picker";
 import { Button } from "~/components/ui/button";
@@ -62,7 +57,7 @@ export function FilterSidebar() {
           <CardTitle>Filters</CardTitle>
         </CardHeader>
         <CardContent className="">
-          <div className="flex gap-2">
+          <div className="flex flex-col gap-2 space-y-2 2xl:flex-row 2xl:space-y-0">
             <SortSelect />
             <PageSizeSelect />
           </div>
@@ -77,7 +72,7 @@ export function FilterSidebar() {
             selectedBreeds.length > 0 ||
             locationZipCodes.length > 0 ? (
               <div className="flex flex-row items-center gap-2 pt-2">
-                <span>Active Filters</span>
+                <span className="text-sm">Active Filters</span>
                 <Button
                   size="sm"
                   variant="ghost"

@@ -10,7 +10,7 @@ export default function Page() {
       </Head>
 
       <main className="flex min-h-screen flex-col items-center justify-center">
-        <div className="mx-auto max-w-7xl px-4 py-12 text-center sm:px-6 lg:px-8 lg:py-16">
+        <div className="mx-auto max-w-4xl px-4 py-12 text-center sm:px-6 lg:px-8 lg:py-16">
           <LandingPage />
         </div>
       </main>
@@ -21,7 +21,6 @@ export default function Page() {
 function LandingPage() {
   return (
     <>
-      {" "}
       <h1 className="text-3xl font-bold tracking-tight">
         Welcome to DogFinder!
       </h1>

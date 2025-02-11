@@ -21,7 +21,7 @@ export function MatchSidebar() {
   return (
     <Card className="w-full">
       <CardHeader>
-        <CardTitle>Your Match</CardTitle>
+        <CardTitle>Your Match!</CardTitle>
       </CardHeader>
       <CardContent className="space-y-2">
         <MatchContent />
@@ -94,7 +94,7 @@ export function MatchMobileView() {
     return null;
   }
   return (
-    <Card className="block w-full md:hidden">
+    <Card className="block w-full lg:hidden">
       <CardHeader className="p-4 pb-1">
         <CardTitle className="text-lg leading-none">Your Match!</CardTitle>
       </CardHeader>
