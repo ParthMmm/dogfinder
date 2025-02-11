@@ -1,4 +1,4 @@
-import { useAtom, useSetAtom } from "jotai";
+import { useSetAtom } from "jotai";
 import * as React from "react";
 import { Drawer as DrawerPrimitive } from "vaul";
 
@@ -25,7 +25,7 @@ const DrawerClose = DrawerPrimitive.Close;
 const DrawerOverlay = React.forwardRef<
   React.ElementRef<typeof DrawerPrimitive.Overlay>,
   React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Overlay>
->(({ className, ...props }, ref) => {
+>(({ ...props }, ref) => {
   const closeModals = useSetAtom(closeModalsAtom);
   {
     /* replace drawer overlay, because when modal={false} DrawerOverlay returns null, */

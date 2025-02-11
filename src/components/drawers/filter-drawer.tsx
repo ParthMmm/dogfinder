@@ -15,20 +15,19 @@ import { PageSizeSelect } from "~/components/filtering/page-size-select";
 import { AgeSlider } from "~/components/filtering/age-slider";
 import { LocationPicker } from "~/components/filtering/location-picker";
 import { Button } from "~/components/ui/button";
-import { useQueryState } from "nuqs";
-import { parseAsInteger } from "nuqs";
-import { parseAsString } from "nuqs";
-import { parseAsArrayOf } from "nuqs";
+import {
+  useQueryState,
+  parseAsInteger,
+  parseAsString,
+  parseAsArrayOf,
+} from "nuqs";
 import { XIcon } from "lucide-react";
 import { FilterBadge } from "~/components/filter-badge";
 import { locationSet } from "~/hooks/queries/use-get-dogs-search";
-import { useState } from "react";
 
 export function FilterDrawer() {
   const [isOpen, setIsOpen] = useAtom(filterDrawerOpenAtom);
   const setAgeSliderValues = useSetAtom(ageSliderValuesAtom);
-
-  const [open, setOpen] = useState(isOpen);
 
   const [selectedBreeds, setSelectedBreeds] = useQueryState(
     "breeds",

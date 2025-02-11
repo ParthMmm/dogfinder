@@ -54,13 +54,13 @@ A web app to help you find your perfect furry friend.
 
 For production build:
 
-    ```bash
-    npm run build
-    npm start
-    # or
-    bun run build
-    bun start
-    ```
+```bash
+npm run build
+npm start
+# or
+bun run build
+bun start
+```
 
 ## Known Issues
 
