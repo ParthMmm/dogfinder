@@ -14,6 +14,9 @@ import { Button } from "~/components/ui/button";
 import { XIcon } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import { PageSizeSelect } from "~/components/page-size-select";
+import { LocationPicker } from "~/components/location-picker";
+import { locationSet } from "~/hooks/queries/use-get-dogs-search";
+import { Location } from "~/lib/api/types";
 
 export function FilterSidebar() {
   const setAgeSliderValues = useSetAtom(ageSliderValuesAtom);
@@ -31,12 +34,18 @@ export function FilterSidebar() {
     parseAsInteger.withDefault(20).withOptions({ clearOnDefault: true }),
   );
 
+  const [locationZipCodes, setLocationZipCodes] = useQueryState(
+    "locations",
+    parseAsArrayOf(parseAsString).withDefault([]),
+  );
+
   const clearFilters = () => {
     void setMinAge(null);
     void setMaxAge(null);
     setSliderUsed(false);
     setAgeSliderValues([0, 20]);
     void setSelectedBreeds([]);
+    void setLocationZipCodes([]);
   };
 
   return (
@@ -52,10 +61,13 @@ export function FilterSidebar() {
         <div className="flex flex-row flex-wrap gap-4 pt-4">
           <BreedPicker />
           <AgeSlider />
+          <LocationPicker />
         </div>
 
         <div className="flex flex-col flex-wrap gap-4">
-          {sliderUsed || selectedBreeds.length > 0 ? (
+          {sliderUsed ||
+          selectedBreeds.length > 0 ||
+          locationZipCodes.length > 0 ? (
             <div className="flex flex-row items-center gap-2 pt-2">
               <span>Active Filters</span>
               <Button
@@ -83,6 +95,24 @@ export function FilterSidebar() {
                 />
               </FilterBadge>
             ) : null}
+            <div className="flex flex-row flex-wrap gap-2">
+              {locationZipCodes.map((location) => {
+                const locationObject = locationSet.get(location);
+                if (!locationObject) return null;
+                return (
+                  <FilterBadge key={location}>
+                    {locationObject.city}, {locationObject.state}{" "}
+                    <FilterBadgeXButton
+                      onClick={() => {
+                        void setLocationZipCodes(
+                          locationZipCodes.filter((zip) => zip !== location),
+                        );
+                      }}
+                    />
+                  </FilterBadge>
+                );
+              })}
+            </div>
             <div className="flex flex-row flex-wrap gap-2">
               {selectedBreeds.map((selected) => (
                 <FilterBadge key={selected}>

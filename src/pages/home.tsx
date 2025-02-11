@@ -65,8 +65,12 @@ function DogTable() {
     "pageSize",
     parseAsString.withDefault("25"),
   );
-  if (!dogsQuery.data) {
-    return null;
+  if (!dogsQuery.data || dogsQuery.data.length === 0) {
+    return (
+      <div className="flex h-full items-center justify-center">
+        <div className="text-2xl font-bold">No dogs found</div>
+      </div>
+    );
   }
   if (dogsQuery.isError) {
     return <div>error</div>;

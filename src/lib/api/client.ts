@@ -1,6 +1,12 @@
 import { ofetch } from "ofetch";
 import { z } from "zod";
-import { type Dog } from "./types";
+import type {
+  Dog,
+  Location,
+  locationSearchSchema,
+  dogSearchSchema,
+  DogSearch,
+} from "./types";
 
 const BASE_URL = "https://frontend-take-home-service.fetch.com";
 
@@ -37,43 +43,6 @@ export async function getDogBreeds() {
   });
 }
 
-export const sortSchema = z.enum([
-  "breed:asc",
-  "breed:desc",
-  "name:asc",
-  "name:desc",
-  "age:asc",
-  "age:desc",
-]);
-
-export const sortLiterals = [
-  "breed:asc",
-  "breed:desc",
-  "name:asc",
-  "name:desc",
-  "age:asc",
-  "age:desc",
-] as const;
-
-export type SortOption = z.infer<typeof sortSchema>;
-
-export const dogSearchSchema = z.object({
-  breeds: z.array(z.string()).optional(),
-  zipCodes: z.array(z.number()).optional(),
-  ageMin: z.number().optional(),
-  ageMax: z.number().optional(),
-  size: z.string().default("25").optional(),
-  from: z.number().optional(),
-  sort: sortSchema.optional(),
-});
-
-export type DogSearch = {
-  resultIds: string[];
-  total: number;
-  next: string;
-  prev: string;
-};
-
 export async function getDogSearch(data: z.infer<typeof dogSearchSchema>) {
   return api<DogSearch>("/dogs/search", {
     method: "GET",
@@ -85,5 +54,24 @@ export async function getDogsById({ dogIds }: { dogIds: string[] }) {
   return api<Dog[]>("/dogs", {
     method: "POST",
     body: JSON.stringify(dogIds),
+  });
+}
+
+export async function getLocations({ zipCodes }: { zipCodes: string[] }) {
+  return api<Location[]>("/locations", {
+    method: "POST",
+    body: JSON.stringify(zipCodes),
+  });
+}
+
+export async function getLocationByZipCode(
+  data: z.infer<typeof locationSearchSchema>,
+) {
+  return api<{
+    results: Location[];
+    total: number;
+  }>("/locations/search", {
+    method: "POST",
+    body: data,
   });
 }

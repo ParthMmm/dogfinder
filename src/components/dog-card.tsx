@@ -6,8 +6,15 @@ import { Card, CardContent } from "./ui/card";
 import Image from "next/image";
 import { useAtom } from "jotai";
 import { favoriteDogsAtom } from "~/store/app";
+import { useGetDogsSearch } from "~/hooks/queries/use-get-dogs-search";
 
 export function DogCard({ dog }: { dog: Dog }) {
+  const { locations } = useGetDogsSearch();
+
+  const location = locations?.find(
+    (location) => location?.zip_code === dog.zip_code,
+  );
+
   return (
     <Card key={dog.id} className="w-full md:min-w-[200px]">
       <CardContent className="p-0">
@@ -29,12 +36,18 @@ export function DogCard({ dog }: { dog: Dog }) {
             </div>
             <div className="flex flex-row items-center gap-2 pt-2">
               {dog.age === 0 ? (
-                <p className="text-sm">Puppy</p>
+                <span className="text-sm">Puppy</span>
               ) : (
-                <p className="text-sm">{dog.age} years old</p>
+                <span className="text-sm">{dog.age} years old</span>
               )}
             </div>
-            <p className="text-sm tabular-nums">{dog.zip_code}</p>
+            {location ? (
+              <span className="text-sm tabular-nums">
+                {location?.city}, {location?.state}
+              </span>
+            ) : (
+              <span className="text-sm tabular-nums">{dog.zip_code}</span>
+            )}
           </div>{" "}
           <div>
             <FavoriteDogButton dog={dog} />

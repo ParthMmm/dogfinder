@@ -1,4 +1,3 @@
-import { type SortOption } from "~/lib/api/client";
 import {
   Select,
   SelectContent,
@@ -8,6 +7,7 @@ import {
 } from "./ui/select";
 import { parseAsString, useQueryState } from "nuqs";
 import { Label } from "~/components/ui/label";
+import { type SortOption } from "~/lib/api/types";
 
 const sortOptions: Record<SortOption, string> = {
   "breed:asc": "Breed: A - Z",
