@@ -31,7 +31,7 @@ export default function Page() {
         <div className="flex flex-row items-center justify-between align-middle">
           <div className="text-left">
             <div className="text-3xl font-bold tracking-tight">
-              {"find a dog"}
+              <h1>Find a dog</h1>
             </div>
           </div>
         </div>
@@ -87,7 +87,7 @@ function DogTable() {
         {Array.from({ length: 12 }).map((_, index) => (
           <Card key={index} className="w-full md:min-w-[200px]">
             <CardContent className="p-0">
-              <div className="aspect-[3/4] w-full animate-pulse rounded-t-md bg-stone-500 object-cover group-hover:opacity-75 sm:aspect-auto sm:h-96 md:w-[200px]" />
+              <div className="aspect-[3/4] w-full animate-pulse rounded-t-md bg-stone-500 object-cover group-hover:opacity-75 sm:aspect-auto sm:h-72" />
 
               <div className="p-4">
                 <div className="h-6 w-full animate-pulse rounded-md bg-stone-500" />

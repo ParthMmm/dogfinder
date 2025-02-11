@@ -8,9 +8,9 @@ export function Nav() {
       <nav className="flex w-full flex-row justify-between">
         <div className="flex items-center gap-4">
           <Link href="/">
-            <h1 className="text-xl font-black leading-6 tracking-tighter">
+            <span className="text-xl font-black leading-6 tracking-tighter">
               DogFinder
-            </h1>
+            </span>
           </Link>
         </div>
 

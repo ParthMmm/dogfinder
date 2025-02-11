@@ -38,7 +38,9 @@ export function DogCard({ dog }: { dog: Dog }) {
               {dog.age === 0 ? (
                 <span className="text-sm">Puppy</span>
               ) : (
-                <span className="text-sm">{dog.age} years old</span>
+                <span className="text-sm">
+                  {dog.age === 1 ? "1 year old" : `${dog.age} years old`}
+                </span>
               )}
             </div>
             {location ? (

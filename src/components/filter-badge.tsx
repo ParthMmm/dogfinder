@@ -17,6 +17,7 @@ export function FilterBadgeXButton({ onClick }: { onClick: () => void }) {
     <button
       onClick={onClick}
       className="rounded-sm text-stone-400 transition-colors hover:text-stone-500 focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-orange-500 focus-visible:ring-0 dark:text-stone-700"
+      aria-label="Remove filter"
     >
       <X className="h-4 w-4" />
     </button>

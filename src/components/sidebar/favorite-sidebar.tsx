@@ -38,7 +38,6 @@ export function FavoriteSidebar() {
           </div>
         </CardTitle>
       </CardHeader>
-      <CardDescription></CardDescription>
       <CardContent className="space-y-2">
         {favoriteDogs.map((dog) => {
           return (
@@ -50,7 +49,7 @@ export function FavoriteSidebar() {
                       src={dog.img}
                       width={40}
                       height={40}
-                      alt={"dog"}
+                      alt={`Photo of ${dog.name}, a ${dog.breed}`}
                       className="aspect-square rounded-sm object-cover"
                     />
                   </div>
