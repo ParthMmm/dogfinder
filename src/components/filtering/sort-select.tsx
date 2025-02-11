@@ -4,7 +4,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "./ui/select";
+} from "~/components/ui/select";
 import { parseAsString, useQueryState } from "nuqs";
 import { Label } from "~/components/ui/label";
 import { type SortOption } from "~/lib/api/types";

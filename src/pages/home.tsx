@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import { parseAsInteger, useQueryState } from "nuqs";
 import { parseAsString } from "nuqs";
+import { MatchSidebar } from "~/components/sidebar/match-sidebar";
 
 export default function Page() {
   return (
@@ -48,7 +49,8 @@ Page.getLayout = function getLayout(dashboardPage: ReactElement) {
 function DogSearch() {
   return (
     <div className="flex h-full flex-col gap-6 md:flex-row">
-      <div className="w-full space-y-4 md:w-1/4">
+      <div className="w-full space-y-4 overflow-y-auto pb-4 md:w-1/4">
+        <MatchSidebar />
         <FilterSidebar />
         <FavoriteSidebar />
       </div>
@@ -61,10 +63,7 @@ function DogSearch() {
 
 function DogTable() {
   const { dogsQuery, total } = useGetDogsSearch();
-  const [pageSize, setPageSize] = useQueryState(
-    "pageSize",
-    parseAsString.withDefault("25"),
-  );
+
   if (
     (!dogsQuery.data || dogsQuery.data.length === 0) &&
     !dogsQuery.isPending
@@ -128,6 +127,7 @@ function Pagination() {
         size="icon"
         onClick={() => setPage(1)}
         disabled={page === 1}
+        aria-label="First page"
       >
         <ChevronsLeftIcon />
       </Button>
@@ -140,6 +140,7 @@ function Pagination() {
           }
         }}
         disabled={page === 1}
+        aria-label="Previous page"
       >
         <ChevronLeftIcon />
       </Button>
@@ -152,6 +153,7 @@ function Pagination() {
           }
         }}
         disabled={page === totalPages}
+        aria-label="Next page"
       >
         <ChevronRightIcon />
       </Button>
@@ -164,6 +166,7 @@ function Pagination() {
           }
         }}
         disabled={page === totalPages}
+        aria-label="Last page"
       >
         <ChevronsRightIcon />
       </Button>

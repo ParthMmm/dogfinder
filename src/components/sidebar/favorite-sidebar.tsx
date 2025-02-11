@@ -1,10 +1,17 @@
 import { useAtom } from "jotai";
-import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "~/components/ui/card";
 import { favoriteDogsAtom } from "~/store/app";
 import Image from "next/image";
 import { FavoriteDogButton } from "../dog-card";
 import { Button } from "~/components/ui/button";
 import { useDogMatch } from "~/hooks/queries/use-dog-match";
+import { X } from "lucide-react";
 export function FavoriteSidebar() {
   const [favoriteDogs, setFavoriteDogs] = useAtom(favoriteDogsAtom);
 
@@ -17,8 +24,21 @@ export function FavoriteSidebar() {
   return (
     <Card className="w-full">
       <CardHeader>
-        <CardTitle>Favorite Dogs</CardTitle>
+        <CardTitle>
+          <div className="flex flex-row items-center justify-between gap-2">
+            Favorite Dogs
+            <Button
+              size="sm"
+              variant="ghost"
+              className="text-stone-500 dark:text-stone-400"
+              onClick={() => setFavoriteDogs([])}
+            >
+              Clear <X className="h-4 w-4" />
+            </Button>
+          </div>
+        </CardTitle>
       </CardHeader>
+      <CardDescription></CardDescription>
       <CardContent className="space-y-2">
         {favoriteDogs.map((dog) => {
           return (

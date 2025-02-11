@@ -29,7 +29,7 @@ export function UserButton() {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
+      <DropdownMenuTrigger>
         <Avatar className={cn("aspect-square h-8 w-8 rounded-none")}>
           <AvatarFallback className="bg-orange-500/15 text-sm text-orange-500">
             {currentUser?.name.charAt(0).toUpperCase()}

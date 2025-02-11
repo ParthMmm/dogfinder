@@ -23,13 +23,13 @@ export function DogCard({ dog }: { dog: Dog }) {
           width={200}
           height={266}
           className="aspect-[3/4] w-full rounded-t-md bg-gray-200 object-cover sm:aspect-auto sm:h-72"
-          alt="picture of a dog"
+          alt={`Photo of ${dog.name}, a ${dog.breed}`}
         />
 
         <div className="flex flex-row justify-between p-4">
           <div>
             <div className="flex flex-col gap-0.5">
-              <h3 className="text-xl font-medium leading-4">{dog.name}</h3>
+              <h2 className="text-xl font-medium leading-4">{dog.name}</h2>
               <p className="text-lg text-neutral-700 dark:text-neutral-400">
                 {dog.breed}
               </p>
@@ -82,7 +82,9 @@ export function FavoriteDogButton({ dog }: { dog: Dog }) {
       <HeartIcon
         className={cn(
           "h-4 w-4",
-          isFavorited ? "fill-red-500 text-red-500 hover:fill-none" : "",
+          isFavorited
+            ? "fill-red-500 text-red-500 transition-colors hover:fill-none"
+            : "",
         )}
       />
     </Button>

@@ -1,8 +1,8 @@
 import { skipToken, useQuery } from "@tanstack/react-query";
 import { useMutation } from "@tanstack/react-query";
-import { useAtom } from "jotai";
+import { useAtom, useSetAtom } from "jotai";
 import { getDogsById, getMatch } from "~/lib/api/client";
-import { favoriteDogsAtom } from "~/store/app";
+import { favoriteDogsAtom, matchModalOpenAtom } from "~/store/app";
 import { toast } from "sonner";
 import { parseAsString, useQueryState } from "nuqs";
 
@@ -12,13 +12,13 @@ export function useDogMatch() {
     "matchResult",
     parseAsString.withDefault(""),
   );
-
-  console.log(matchResult);
+  const setIsOpen = useSetAtom(matchModalOpenAtom);
 
   const matchMutation = useMutation({
     mutationFn: getMatch,
     onSuccess: (data) => {
       void setMatchResult(data.match);
+      void setIsOpen(true);
     },
     onError: (error) => {
       console.error(error);
