@@ -65,7 +65,7 @@ bun start
 ## Known Issues
 
 - Page refresh will clear cookies due to Chrome's third-party cookie restrictions
-  - AWSALB cookie lacks SameSite attribute
+  - AWSALB cookie lacks SameSite attribute and is not marked Secure
     ```
     This Set-Cookie header didn't specify a "SameSite" attribute and was defaulted to
     "SameSite=Lax," and was blocked because it came from a cross-site response which
