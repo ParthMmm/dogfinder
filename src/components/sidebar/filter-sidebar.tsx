@@ -15,7 +15,7 @@ import {
 import { FilterBadge, FilterBadgeXButton } from "~/components/filter-badge";
 import { BreedPicker } from "~/components/filtering/breed-picker";
 import { Button } from "~/components/ui/button";
-import { FilterIcon, HeartIcon, MenuIcon, XIcon } from "lucide-react";
+import { XIcon } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import { PageSizeSelect } from "~/components/filtering/page-size-select";
 import { LocationPicker } from "~/components/filtering/location-picker";
@@ -26,8 +26,6 @@ import { FavoriteDrawer } from "~/components/drawers/favorite-drawer";
 
 export function FilterSidebar() {
   const setAgeSliderValues = useSetAtom(ageSliderValuesAtom);
-  const setFilterDrawerOpen = useSetAtom(filterDrawerOpenAtom);
-  const setFavoriteDrawerOpen = useSetAtom(favoriteDrawerOpenAtom);
 
   const [selectedBreeds, setSelectedBreeds] = useQueryState(
     "breeds",
@@ -59,25 +57,7 @@ export function FilterSidebar() {
 
   return (
     <>
-      <div className="flex flex-row gap-2">
-        <Button
-          variant="outline"
-          className="md:hidden"
-          onClick={() => setFilterDrawerOpen(true)}
-        >
-          <FilterIcon className="h-4 w-4" />
-          <span>Filters</span>
-        </Button>
-        <Button
-          variant="outline"
-          className="md:hidden"
-          onClick={() => setFavoriteDrawerOpen(true)}
-        >
-          <HeartIcon className="h-4 w-4" />
-          <span>Favorites</span>
-        </Button>
-      </div>
-      <Card className="hidden w-full md:block">
+      <Card className="w-full">
         <CardHeader>
           <CardTitle>Filters</CardTitle>
         </CardHeader>

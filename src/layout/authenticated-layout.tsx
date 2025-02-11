@@ -27,7 +27,7 @@ export function AuthenticatedLayout({
     <div className="flex min-h-screen flex-col">
       <Nav />
       <MatchModal />
-      <main className="flex h-[calc(100vh-64px)] overflow-hidden py-4 pb-12">
+      <main className="flex h-[calc(100vh-64px)] overflow-hidden pb-12 pt-0 md:pt-4">
         {children}
       </main>
     </div>

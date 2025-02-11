@@ -75,7 +75,7 @@ export function FilterDrawer() {
           </DrawerDescription>
         </DrawerHeader>
         <div className="flex-1 overflow-y-auto">
-          <div className="flex w-full flex-col items-start p-2">
+          <div className="flex w-full flex-col items-center justify-center p-2">
             <div className="flex w-full justify-center gap-2">
               <SortSelect />
               <PageSizeSelect />
@@ -86,7 +86,7 @@ export function FilterDrawer() {
               <LocationPicker />
             </div>
 
-            <div className="flex flex-col items-start gap-4">
+            <div className="flex w-full flex-col gap-4">
               {sliderUsed ||
               selectedBreeds.length > 0 ||
               locationZipCodes.length > 0 ? (

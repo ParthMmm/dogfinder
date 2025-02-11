@@ -7,13 +7,9 @@ import { Button } from "~/components/ui/button";
 import { useDogMatch } from "~/hooks/queries/use-dog-match";
 import { X } from "lucide-react";
 import { type Dog } from "~/lib/api/types";
-import { useSetAtom } from "jotai";
-import { favoriteDrawerOpenAtom } from "~/store/app";
-import { HeartIcon } from "lucide-react";
 
 export function FavoriteSidebar() {
   const [favoriteDogs, setFavoriteDogs] = useAtom(favoriteDogsAtom);
-  const setFavoriteDrawerOpen = useSetAtom(favoriteDrawerOpenAtom);
 
   if (favoriteDogs.length === 0) {
     return null;
@@ -21,16 +17,7 @@ export function FavoriteSidebar() {
 
   return (
     <>
-      <Button
-        variant="outline"
-        className="md:hidden"
-        onClick={() => setFavoriteDrawerOpen(true)}
-      >
-        <HeartIcon className="h-4 w-4" />
-        <span>Favorites</span>
-      </Button>
-
-      <Card className="hidden w-full md:block">
+      <Card className="w-full">
         <CardHeader>
           <CardTitle>
             <div className="flex flex-row items-center justify-between gap-2">

@@ -22,7 +22,7 @@ export function DogCard({ dog }: { dog: Dog }) {
           src={dog.img}
           width={200}
           height={266}
-          className="aspect-[3/4] w-full rounded-t-md bg-gray-200 object-cover sm:aspect-auto sm:h-72"
+          className="aspect-[3/4] h-48 w-full rounded-t-md bg-gray-200 object-cover sm:aspect-auto sm:h-72"
           alt={`Photo of ${dog.name}, a ${dog.breed}`}
         />
 

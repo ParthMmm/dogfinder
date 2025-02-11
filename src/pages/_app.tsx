@@ -8,6 +8,7 @@ import type { ReactElement, ReactNode } from "react";
 import { Toaster } from "~/components/ui/sonner";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { NuqsAdapter } from "nuqs/adapters/next/pages";
+import { TailwindIndicator } from "~/components/ui/tailwind-indicator";
 
 export const queryClient = new QueryClient({
   defaultOptions: {
@@ -46,6 +47,7 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
           <div className={GeistSans.className}>{layout}</div>
           <Toaster />
           <ReactQueryDevtools />
+          <TailwindIndicator />
         </NuqsAdapter>
       </ThemeProvider>
     </QueryClientProvider>

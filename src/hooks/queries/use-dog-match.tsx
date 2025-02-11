@@ -35,7 +35,6 @@ export function useDogMatch() {
       }),
       {
         loading: "Finding your match...",
-        success: "Match found!",
         error: "Error finding match",
       },
     );

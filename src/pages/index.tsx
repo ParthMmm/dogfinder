@@ -25,7 +25,10 @@ function LandingPage() {
       <h1 className="text-3xl font-bold tracking-tight">
         Welcome to DogFinder!
       </h1>
-      <p>Find your new furry friend today</p>
+      <p className="text-pretty">
+        Find your perfect dog match with our easy-to-use search tool. Filter by
+        breed, age, location, and more to find the perfect dog for you.
+      </p>
       <div className="mt-8 flex justify-center">
         <Link
           href="/login"
