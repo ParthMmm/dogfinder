@@ -1,4 +1,4 @@
-# DogFinder
+# 🐶 DogFinder
 
 A web app to find your new furry friend.
 
